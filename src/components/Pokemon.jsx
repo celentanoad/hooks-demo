@@ -5,7 +5,7 @@ const Pokemon = ({pokemon}) => {
     
     return ( 
         <>
-        {pokemon.name}
+        {/* {pokemon.name} */}
         </>
         
      );

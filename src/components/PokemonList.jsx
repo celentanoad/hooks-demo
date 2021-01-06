@@ -13,8 +13,8 @@ const PokemonList = () => {
     const [num, setNum] = useState(1);
     const {data} = useQuery("pokemon", getPokemonData(num));
 
-    const addItem = (pokemon) => {
-        setList([...list, pokemon]);
+    const addItem = () => {
+        setList([...list, data]);
     }
 
     const getRandomNum = () => {
@@ -24,12 +24,12 @@ const PokemonList = () => {
     return ( 
         <>
         <button onClick={getRandomNum}>Find a Pokemon!</button>
-        <p>{data.name}</p>
-        <button onClick={addItem}>Add to List</button>
+        {/* <p>{data.name}</p> */}
+        <button onClick={addItem} value={data}>Add to List</button>
         <div>
             {
                 list.map(pokemon => {
-                    return <Pokemon pokemon={pokemon} addItem={addItem}/>
+                    return <Pokemon pokemon={pokemon} />
                 })
             }
         </div>
