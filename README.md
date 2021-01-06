@@ -2,6 +2,8 @@
 
 ## Simple app designed to practice using various React hooks
 
+View the deployed demo here: https://hooks-demo-react.netlify.app/
+
 ---
 
 **useQuery hook**
