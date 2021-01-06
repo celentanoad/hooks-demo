@@ -1,11 +1,15 @@
 import { useState } from 'react';
-
+import '../App.css';
 
 const Pokemon = ({pokemon}) => {
     
     return ( 
         <>
-        {/* {pokemon.name} */}
+          <div className="container">
+            <img src={pokemon.sprites.front_shiny} alt="pokemon"></img>
+            <div className="pokemon">{pokemon.name}</div> 
+          </div>
+          <hr></hr>      
         </>
         
      );

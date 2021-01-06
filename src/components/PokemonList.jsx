@@ -11,7 +11,7 @@ const getPokemonData = async (num) => {
 const PokemonList = () => {
     const [list, setList] = useState([]);
     const [num, setNum] = useState(1);
-    const {data} = useQuery("pokemon", getPokemonData(num));
+    const {data, isLoading} = useQuery(["pokemon", {num}], () => getPokemonData(num));
 
     const addItem = () => {
         setList([...list, data]);
@@ -23,13 +23,19 @@ const PokemonList = () => {
 
     return ( 
         <>
-        <button onClick={getRandomNum}>Find a Pokemon!</button>
-        {/* <p>{data.name}</p> */}
-        <button onClick={addItem} value={data}>Add to List</button>
+        <div className="container">
+            <button onClick={getRandomNum} disabled={isLoading}>Find a Pokemon!</button>
+            { 
+                isLoading ? <p>Loading...</p>
+                :
+                <p>{data.name}</p>
+            }
+            <button onClick={addItem} value={data}>Add to List</button>
+        </div>
         <div>
             {
                 list.map(pokemon => {
-                    return <Pokemon pokemon={pokemon} />
+                    return <Pokemon pokemon={pokemon} key={pokemon.id} />
                 })
             }
         </div>

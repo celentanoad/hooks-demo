@@ -14,3 +14,15 @@
   color: white;
 }
 
+.pokemon {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 36px;
+}
+
+.container {
+  position: relative;
+  text-align: center;
+}
+img {
+  height: 200px;
+}
