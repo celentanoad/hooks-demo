@@ -1,22 +1,35 @@
 import { useState } from 'react';
-import Item from './Pokemon';
+import { useQuery } from 'react-query';
+import Pokemon from './Pokemon';
 
-const Wishlist = () => {
+const getPokemonData = async (num) => {
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${num}`);
+    const data = await response.json();
+    return data;
+  }
+
+const PokemonList = () => {
     const [list, setList] = useState([]);
-
+    const [num, setNum] = useState(1);
+    const {data} = useQuery("pokemon", getPokemonData(num));
 
     const addItem = (pokemon) => {
         setList([...list, pokemon]);
     }
 
-    
+    const getRandomNum = () => {
+        setNum(Math.floor(Math.random() * 898 + 1));
+    }
+
     return ( 
         <>
+        <button onClick={getRandomNum}>Find a Pokemon!</button>
+        <p>{data.name}</p>
         <button onClick={addItem}>Add to List</button>
         <div>
             {
-                list.map(item => {
-                    return <Item item={item} addItem={addItem}/>
+                list.map(pokemon => {
+                    return <Pokemon pokemon={pokemon} addItem={addItem}/>
                 })
             }
         </div>
@@ -24,4 +37,4 @@ const Wishlist = () => {
      );
 }
  
-export default Wishlist;
+export default PokemonList;
