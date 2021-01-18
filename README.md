@@ -44,3 +44,39 @@ and add a conditional to where we render our data:
 
 This change will now provide **Loading...** text when the API is fetching the data, and otherwise display the name of the Pokemon.
 
+---
+
+**useRef hook**
+
+- The `useRef` hook returns a mutable object with a `.current` property
+- There are two main uses of `useRef`: Accessing DOM nodes and persisting data between renders
+
+The app was updated to include a `name` input and state. There is a ref called `inputEl` which refers to our input:
+
+ ```
+ <input 
+    ref={inputEl} 
+    type="text" 
+    onChange={e => 
+    setName(e.target.value)}
+/>
+```
+
+The button labled "Change Name" calls a function which accesses the `.current` property of the `inputEl` ref and calls the `focus()` method.
+
+```
+const handleClick = () => {
+    inputEl.current.focus();
+}
+```
+
+We can also use the `useRef` hook to persist data outside of state. For example, in the `PokemonList.jsx` file, a `lastPokemon` ref was added.
+
+When the "Find a Pokemon" button is clicked, the function that is called will now additionally store the current state in the `lastPokemon.current` value:
+
+`lastPokemon.current = data.name;`
+
+Now even though the page is re-rendered when that button is clicked, the previous state is stored and can be accessed here:
+
+`<div>Last Pokemon Found: {lastPokemon.current}</div>`
+

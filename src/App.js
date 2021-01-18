@@ -17,7 +17,7 @@ function App() {
     <div className="App">
       <header className="App-header"> Pokemon Collector</header>
       <h3> Collect your Pokemon here!</h3>
-      <h4>{name}</h4>
+      <h4>Pokemon Hunter: {name}</h4>
       
         <input ref={inputEl} type="text" onChange={e => setName(e.target.value)}/>
         
