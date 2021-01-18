@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useQuery } from 'react-query';
 import Pokemon from './Pokemon';
 
@@ -12,12 +12,14 @@ const PokemonList = () => {
     const [list, setList] = useState([]);
     const [num, setNum] = useState(1);
     const {data, isLoading} = useQuery(["pokemon", {num}], () => getPokemonData(num));
-
+    const lastPokemon = useRef('');
+    
     const addItem = () => {
         setList([...list, data]);
     }
 
     const getRandomNum = () => {
+        lastPokemon.current = data.name;
         setNum(Math.floor(Math.random() * 898 + 1));
     }
 
@@ -31,6 +33,7 @@ const PokemonList = () => {
                 <p>{data.name}</p>
             }
             <button onClick={addItem} value={data}>Add to List</button>
+            <div>Last Pokemon Found: {lastPokemon.current}</div>
         </div>
         <div>
             {
